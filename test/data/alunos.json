@@ -1,0 +1,22 @@
+[
+  {
+    "nome": "Cauê Krespi",
+    "email": "cauekrespi@example.com",
+    "matricula": "2026001",
+    "senha": "123456",
+    "disciplinaId": "disciplina-matematica",
+    "trabalho": {
+      "titulo": "Trabalho de Matemática"
+    }
+  },
+  {
+    "nome": "Joao da Silva",
+    "email": "joaosilva@example.com",
+    "matricula": "2026002",
+    "senha": "123456",
+    "disciplinaId": "disciplina-programacao-web",
+    "trabalho": {
+      "titulo": "Trabalho de Programação Web"
+    }
+  }
+]

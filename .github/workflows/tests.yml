@@ -9,6 +9,13 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      PORT: 3000
+      BASE_URL: http://localhost:3000
+      ADMIN_EMAIL: admin@escola.com
+      ADMIN_PASSWORD: admin123
+      JWT_SECRET: segredo-dev-gestao-de-alunos
+      MONGODB_URI: mongodb://127.0.0.1:27017/gestao-de-alunos-test
 
     services:
       mongodb:
@@ -34,7 +41,16 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
+      - name: Iniciar a API
+        run: npm start > api.log 2>&1 &
+
+      - name: Aguardar a API
+        run: |
+          for i in {1..30}; do
+            curl -fsS http://localhost:3000/ >/dev/null && break
+            sleep 2
+          done
+          curl -fsS http://localhost:3000/ >/dev/null
+
       - name: Executar testes
         run: npm test
-        env:
-          MONGODB_URI: mongodb://127.0.0.1:27017/gestao-de-alunos-test
