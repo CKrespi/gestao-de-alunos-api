@@ -2,8 +2,8 @@ import request from 'supertest';
 
 export async function loginAdmin(baseUrl) {
   const payload = {
-    email: process.env.ADMIN_EMAIL || 'admin@escola.com',
-    senha: process.env.ADMIN_PASSWORD || 'admin123',
+    email: process.env.ADMIN_EMAIL,
+    senha: process.env.ADMIN_PASSWORD,
   };
 
   const resposta = await request(baseUrl).post('/api/auth/login').send(payload);

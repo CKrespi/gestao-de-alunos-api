@@ -6,12 +6,16 @@ let memoryServer;
 export async function ensureMongoConnection() {
   if (mongoose.connection.readyState === 1) return;
 
-  const uri = process.env.MONGODB_URI;
+  const configuredUri = process.env.MONGODB_URI;
 
-  if (uri) {
-    await mongoose.connect(uri);
-    console.log(`MongoDB conectado em ${uri}`);
-    return;
+  if (configuredUri) {
+    try {
+      await mongoose.connect(configuredUri);
+      console.log(`MongoDB conectado em ${configuredUri}`);
+      return;
+    } catch (error) {
+      console.warn(`Falha ao conectar em ${configuredUri}. Tentando MongoDB em memória...`);
+    }
   }
 
   if (!memoryServer) {
